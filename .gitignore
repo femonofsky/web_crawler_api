@@ -1,0 +1,6 @@
+.pytest_cache/**
+.idea/**
+env/**
+htmlcov/**
+.coveragerc
+web_crawler_api/config/settings.ini
