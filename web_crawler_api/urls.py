@@ -16,6 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from crawler.views import *
+
 urlpatterns = [
-    path('admin/', admin.site.urls),
+
+    # Category
+    path('create-company/', CreateCompany.as_view(), name='create_company'),
+    path('companies/', GetAllCompanies.as_view(), name='all_companies'),
+    # path('admin/', admin.site.urls),
 ]
