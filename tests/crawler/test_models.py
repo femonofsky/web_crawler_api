@@ -2,6 +2,7 @@ import factory
 from django.test import TestCase
 from crawler.models import CompanyProfile
 
+
 class CompanyProfileFactory(factory.DjangoModelFactory):
     class Meta:
         model = CompanyProfile
@@ -11,7 +12,7 @@ class CompanyProfileFactory(factory.DjangoModelFactory):
     office_address = "Jl Pulo Ayang Raya Blok OR No. 1 Kawasan Industri Pulogadung Jakarta"
     email_address = "Investor@astra-agro.co.id."
     phone = "+62 461-65-55"
-    fax = ["+62 461-6655", "+62 461-6677","+62 461-6688"]
+    fax = ["+62 461-6655", "+62 461-6677", "+62 461-6688"]
     npwp = "01.334.427.0-054.000"
     company_website = "http://www.astra-agro.co.id"
     ipo_date = "1997-12-09"
@@ -19,12 +20,10 @@ class CompanyProfileFactory(factory.DjangoModelFactory):
     sector = "AGRICULTURE"
     sub_sector = "PLANTATION"
     registrar = "PT. Raya Saham Registrar (dulu bernama PT. Risjad Salim Registra"
-    corporate_Secretary = []
-    director = []
     corporate_Secretary = [{'name': 'Mario Casimirus Surung Gultom',
-                            'email':'investor@astra-agro.co.id','phone':'+62 021-4616555'}]
-    director = [{"name":"Santosa","position":"PRESIDEN DIREKTUR"},
-                {"name":"Joko Supriyono","position":"WAKIL PRESIDEN DIREKTUR"}]
+                            'email': 'investor@astra-agro.co.id', 'phone': '+62 021-4616555'}]
+    director = [{"name": "Santosa", "position": "PRESIDEN DIREKTUR"},
+                {"name": "Joko Supriyono", "position": "WAKIL PRESIDEN DIREKTUR"}]
 
 
 class TestCompanyProfileFactory(TestCase):

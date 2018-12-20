@@ -7,29 +7,33 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.exceptions import ValidationError
 
-from django_filters import rest_framework as filters
+from django_filters.rest_framework import DjangoFilterBackend
 
-from rest_framework_tracking.mixins import LoggingMixin
 
 # Create your views here.
-class GetAllCompanies(LoggingMixin, ListAPIView):
+class GetAllCompanies(ListAPIView):
     """
     Get all companies
     """
     serializer_class = CompanySerializer
-    filter_backends = (filters.DjangoFilterBackend,)
+    filter_backends = (DjangoFilterBackend,)
     filterset_class = CompanyFilter
 
-    def get(self, request, *args, **kwargs):
-        company_profiles = CompanyProfile.objects.all()
-        serializer = self.serializer_class(instance=company_profiles, many=True)
+    def list(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset())
+
+        serializer = self.get_serializer(queryset, many=True)
         return format_response(
-            status.HTTP_201_CREATED,
-            serializer.data,
-            'Successful'
+                status.HTTP_200_OK,
+                serializer.data,
+                'Successful'
         )
 
-class CreateCompany(LoggingMixin, CreateAPIView):
+    def get_queryset(self):
+        return CompanyProfile.objects.all()
+
+
+class CreateCompany(CreateAPIView):
     """
         Create company
     """
@@ -49,6 +53,7 @@ class CreateCompany(LoggingMixin, CreateAPIView):
             'Company Created.'
         )
 
+
 def format_response(code, data, msg):
     response = Response({
         'status_code': code,
@@ -57,6 +62,7 @@ def format_response(code, data, msg):
     }, status=code)
 
     return response
+
 
 def format_error_response(code, msg):
     response = Response({

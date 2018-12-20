@@ -47,7 +47,6 @@ INSTALLED_APPS = [
     'drf_yasg',
     'corsheaders',
     'crawler',
-    'django_filters'
 ]
 
 MIDDLEWARE = [
@@ -115,11 +114,8 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 REST_FRAMEWORK = {
-    'DEFAULT_FILTER_BACKENDS': (
-        'django_filters.rest_framework.DjangoFilterBackend',
-    )
+    'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',)
 }
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
